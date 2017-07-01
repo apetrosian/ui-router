@@ -1,3 +1,6 @@
+var module = angular.mock.module;
+var uiRouter = require("../src/index");
+
 describe('uiView', function () {
   'use strict';
 
@@ -17,6 +20,14 @@ describe('uiView', function () {
       $timeout.flush();
       expect(elem[0].scrollIntoView).toHaveBeenCalled();
     }));
+
+	  it('should return the promise from the timeout', inject(function ($uiViewScroll, $timeout) {
+		  var promise = $uiViewScroll(elem);
+
+		  $timeout.flush();
+		  expect(elem[0].scrollIntoView).toHaveBeenCalled();
+		  expect(promise).toBeDefined();
+	  }));
   });
 
   describe('useAnchorScroll', function () {
